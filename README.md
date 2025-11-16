@@ -48,7 +48,7 @@ This service aggregates real-time cryptocurrency data from multiple DEX sources,
 | `sortBy` | `volume_sol` | Sorts the results. Defaults to `market_cap_sol`. |
 | `order` | `asc` | Sort order (`asc` or `desc`). Defaults to `desc`. |
 | `limit` | `10` | Number of results per page. Defaults to `20`. |
-| `cursor` | `...` | The `token_address` of the last item from the previous page. |
+| `cursor` | `hy1opf2bqRDwAxoktyWAj6f3UpeHcLydzEdKjMYGs2u` | The `token_address` of the last item from the previous page. |
 | `timePeriod` | `24h` | Filters for top gainers over `1h`, `24h`, or `7d`. |
 
 ---
@@ -59,7 +59,7 @@ This project requires Node.js and a running Redis instance.
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/explorer271/Real-time-Meme-Coin-Data-Aggregation-Service
+    git clone https://github.com/explorer271/Real-time-Meme-Coin-Data-Aggregation-Service.git
     cd Real-time-Meme-Coin-Data-Aggregation-Service
     ```
 
