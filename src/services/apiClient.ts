@@ -81,7 +81,7 @@ const normalizeJupiter = (token: any): Token => {
 export const fetchFromJupiter = async (query: string): Promise<Token[]> => {
   try {
     // API URL is for searching tokens, not getting real-time prices in SOL.
-    const response = await apiClient.get(`https://lite-api.jup.ag/v2/search?query=${query}`);
+    const response = await apiClient.get(`https://lite-api.jup.ag/ultra/v1/search?query=${query}`);
     const tokens = response.data || [];
     return tokens.slice(0, 20).map(normalizeJupiter);
   } catch (error) {
