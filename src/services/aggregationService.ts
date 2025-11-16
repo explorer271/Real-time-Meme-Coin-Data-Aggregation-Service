@@ -5,14 +5,16 @@ import cacheService from './cacheService';
 const CACHE_KEY = 'tokens:all';
 const CACHE_TTL_SECONDS = 30;
 
-export const getAggregatedTokens = async (query: string = 'SOL'): Promise<Token[]> => {
-  const cachedData = await cacheService.get(CACHE_KEY);
-  if (cachedData) {
-    console.log('Returning data from cache');
-    return JSON.parse(cachedData);
+export const getAggregatedTokens = async (query: string = 'SOL', forceRefresh: boolean = false): Promise<Token[]> => {
+  if (!forceRefresh) {
+    const cachedData = await cacheService.get(CACHE_KEY);
+    if (cachedData) {
+      console.log('Returning data from cache');
+      return JSON.parse(cachedData);
+    }
   }
 
-  console.log('Cache miss. Fetching from APIs...');
+  console.log(forceRefresh ? 'Forcing refresh...' : 'Cache miss. Fetching from APIs...');
   const [dexScreenerTokens, jupiterTokens] = await Promise.all([
     apiClient.fetchFromDexScreener(query),
     apiClient.fetchFromJupiter(query),

@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
+import { startTokenUpdater } from './jobs/tokenUpdater';
 
 const app = express();
 const port = 3000;
@@ -23,6 +24,7 @@ io.on('connection', (socket) => {
 
 server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
+  startTokenUpdater();
 });
 
 export { io };
