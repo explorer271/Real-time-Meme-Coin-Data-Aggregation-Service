@@ -6,10 +6,7 @@ const apiClient = axios.create();
 
 axiosRetry(apiClient, {
   retries: 3,
-  retryDelay: (retryCount) => {
-    console.log(`Retrying API request, attempt #${retryCount}`);
-    return retryCount * 1000; // 1s, 2s, 3s
-  },
+  retryDelay: axiosRetry.exponentialDelay,
   retryCondition: (error) => {
     return error.response?.status === 429;
   },
@@ -39,6 +36,8 @@ const normalizeDexScreener = (pair: any): Token | null => {
     liquidity_sol: liquiditySol,
     transaction_count: (pair.txns?.h24?.buys ?? 0) + (pair.txns?.h24?.sells ?? 0),
     price_1hr_change: pair.priceChange?.h1 ?? 0,
+    price_24hr_change: pair.priceChange?.h24 ?? 0,
+    price_7d_change: 0,
     protocol: pair.dexId,
   };
 };
@@ -74,6 +73,8 @@ const normalizeJupiter = (token: any): Token => {
     liquidity_sol: 0,
     transaction_count: 0,
     price_1hr_change: token.stats1h?.priceChange ?? 0,
+    price_24hr_change: token.stats24h?.priceChange ?? 0,
+    price_7d_change: token.stats7d?.priceChange ?? 0,
     protocol: 'Jupiter',
   };
 };

@@ -3,7 +3,7 @@ import * as apiClient from './apiClient';
 import cacheService from './cacheService';
 
 const CACHE_KEY = 'tokens:all';
-const CACHE_TTL_SECONDS = 30;
+const CACHE_TTL_SECONDS = 30; // configurable
 
 export const getAggregatedTokens = async (query: string = 'SOL', forceRefresh: boolean = false): Promise<Token[]> => {
   if (!forceRefresh) {

@@ -6,6 +6,22 @@ export const getTokens = async (req: Request, res: Response) => {
   try {
     let tokens = await getAggregatedTokens();
 
+    const timePeriod = req.query.timePeriod as string;
+
+    if (timePeriod) {
+      const filterKeyMap = {
+        '1h': 'price_1hr_change',
+        '24h': 'price_24hr_change',
+        '7d': 'price_7d_change'
+      };
+
+      const filterKey = filterKeyMap[timePeriod as keyof typeof filterKeyMap] as keyof Token;
+
+      if (filterKey) {
+        tokens = tokens.filter(token => (token[filterKey] as number) > 0);
+      }
+    }
+
     const sortBy = req.query.sortBy as keyof Token || 'market_cap_sol';
     const order = req.query.order || 'desc';
 

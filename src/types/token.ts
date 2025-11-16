@@ -8,5 +8,7 @@ export interface Token {
   liquidity_sol: number;
   transaction_count: number;
   price_1hr_change: number;
+  price_24hr_change: number;
+  price_7d_change: number;
   protocol: string;
 }

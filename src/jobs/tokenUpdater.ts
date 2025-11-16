@@ -12,7 +12,7 @@ const findUpdatedTokens = (oldTokens: Token[], newTokens: Token[]): Token[] => {
 
   newTokens.forEach(newToken => {
     const oldToken = oldTokenMap.get(newToken.token_address);
-    if (!oldToken || oldToken.price_sol !== newToken.price_sol) {
+    if (!oldToken || oldToken.price_sol !== newToken.price_sol || newToken.volume_sol > oldToken.volume_sol) {
       updatedTokens.push(newToken);
     }
   });
